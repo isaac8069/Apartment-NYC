@@ -19,6 +19,11 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
+			<Link to='/apartments/all' style={linkStyle}>
+				All Listings
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
 			<Link to='/messages' style={linkStyle}>
 				Inbox
 			</Link>
