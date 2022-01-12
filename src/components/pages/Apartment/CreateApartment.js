@@ -1,115 +1,137 @@
 import React, { useState, useEffect } from 'react'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
+import apiUrl from '../../../apiConfig'
 
-const Apartment = (props) => {
-
+const CreateApartment = (props) => {
     const navigate = useNavigate()
+    console.log('PROPS IN ALL APARTMENT', props)
+    const [newApartment, setNewApartment] = useState({
+        title: '',
+        rent: '',
+        description: '',
+        address: '',
+        address: '',
+        address: '',
+        bedrooms: '',
+        bathrooms: '',
+        amenities: '',
+        tags: [],
+        imgUrl: ''
+    })
 
-    // const [apartment, setApartment] = useState({
-    const [title, setTitle] = useState('')
-    const [rent, setRent] = useState('')
-    const [description, setDescription] = useState('')
-    const [addressPropertiesNeighborhood, setAddressPropertiesNeighborhood] = useState('')
-    const [addressPropertiesBorough, setAddressPropertiesBorough] = useState('')
-    const [addressPropertiesZipCode, setAddressPropertiesZipCode] = useState('')
-    const [bedrooms, setBedrooms] = useState('')
-    const [bathrooms, setBathrooms] = useState('')
-    const [amenities, setAmenities] = useState('')
-    const [roommates, setRoommates] = useState('')
-    const [imgUrl, setimgUrl] = useState('')
-    // })
-
-    // useEffect(() => {
-    //     postApartment()
-    // })
+    const handleChange = (e) => {
+        setNewApartment({ ...newApartment, [e.target.name]: e.target.value })
+    }
 
     const postApartment = (e) => {
         e.preventDefault()
         let preJSONBody = {
-            tittle: title,
-            rent: rent,
-            description: description,
-            address: addressPropertiesNeighborhood,
-            address: addressPropertiesBorough,
-            address: addressPropertiesZipCode,
-            bedrooms: bedrooms,
-            bathrooms: bathrooms,
-            amenities: amenities,
-            roommates: roommates,
-            imgUrl: imgUrl
+            apartment: {
+                title: newApartment.title,
+                rent: newApartment.rent,
+                description: newApartment.description,
+                address: {
+                    neighborhood: newApartment.neighborhood,
+                borough: newApartment.borough,
+                zipcode: newApartment.zipcode
+                },
+                bedrooms: newApartment.bedrooms,
+                bathrooms: newApartment.bathrooms,
+                amenities: newApartment.amenities,
+                tags: newApartment.tags,
+                imgUrl: newApartment.imgUrl
+            }
         }
-        fetch('http://localhost:8000/apartments', {
+        const requestOptions = {
             method: 'POST',
             body: JSON.stringify(preJSONBody),
-            headers: { 'Content-Type': 'application/json' }
-        })
-            .then(response => response.json())
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${props.user.token}`
+            },
+        }
+        fetch(`${apiUrl}/apartments`, requestOptions)
             .then(postedApartment => {
-                props.refreshApartments()
-                setTitle('')
+                props.getApartments()
+                navigate('/apartments/all')
+                // setNewApartment({
+                //     title: '',
+                //     rent: '',
+                //     description: '',
+                //     address: '',
+                //     address: '',
+                //     address: '',
+                //     bedrooms: '',
+                //     bathrooms: '',
+                //     amenities: '',
+                //     // imgUrl: ''
+                // })
             })
             .catch(err => console.error(err))
     }
-    // const postApartment = (e) => {
-    //     console.log('STEP1' )
-    //     e.preventDefault()
-    //     console.log('THIS IS THE STUFF FROM THE FORM', e)
-    //     let preJSONBody = {
-    //         tittle: title,
-    //         rent: rent,
-    //         description: description,
-    //         address: addressPropertiesNeighborhood,
-    //         address: addressPropertiesBorough,
-    //         address: addressPropertiesZipCode,
-    //         bedrooms: bedrooms,
-    //         bathrooms: bathrooms,
-    //         amenities: amenities,
-    //         roommates: roommates,
-    //         imgUrl: imgUrl
-    //     }
-    //     const requestOptions = {
-    //         method: 'POST',
-    //         body: JSON.stringify(preJSONBody),
-    //         headers: {
-    //           'Content-Type': 'application/json',
-    //           'Authorization': `Bearer ${props.user.token}`
-    //         },
-    //       }
-    //       fetch('http://localhost:8000/apartments', requestOptions)
-    //         .then(postedApartment=> {
-    //             console.log('STEP2' )
-    //           props.getApartment()
-    //           navigate('/')
-    //         })
-    //         .catch(err => console.error(err))
-    // }
-    // const handleChange = (e) => setApartment(e.target.name = e.target.value)
-    // const handleChange = (e) => setTitle(e.target.name = e.target.value)
-    // const handleChange = (e) => setRent(e.target.name = e.target.value)
-    // const handleChange = (e) => setDescription(e.target.name = e.target.value)
-    // const handleChange = (e) => setAddressPropertiesNeighborhood(e.target.name = e.target.value)
-    // const handleChange = (e) => setAddressPropertiesBorough(e.target.name = e.target.value)
-    // const handleChange = (e) => setAddressPropertiesZipCode(e.target.name = e.target.value)
-    // const handleChange = (e) => setBedrooms(e.target.name = e.target.value)
-    // const handleChange = (e) => setBathrooms(e.target.name = e.target.value)
-    // const handleChange = (e) => setAmenities(e.target.name = e.target.value)
-    // const handleChange = (e) => setRoommates(e.target.name = e.target.value)
-    // const handleChange = (e) => setimgUrl(e.target.name = e.target.value)
-    
 
     return (
-        <Form onSubmit={postApartment}>
-            <Row className="mb-3">
+        <div>
+            <p>This works for now</p>
+            <form onSubmit={postApartment}>
+                <div>
+                    <label htmlFor="title">Title:</label>
+                    <input type="text" name="title" id="title" onChange={handleChange} value={newApartment.title} />
+                </div>
+                <div>
+                    <label htmlFor="rent">Rent:</label>
+                    <input type="text" name="rent" id="rent" onChange={handleChange} value={newApartment.rent} />
+                </div>
+                <div>
+                    <label htmlFor="description">Description:</label>
+                    <input type="text" name="description" id="description" onChange={handleChange} value={newApartment.description} />
+                </div>
+                <div>
+                    <label htmlFor="address">Neighborhood:</label>
+                    <input type="text" name="address" id="address" onChange={handleChange} value={newApartment.address.neighborhood} />
+                </div>
+                <div>
+                    <label htmlFor="address">Borough:</label>
+                    <input type="text" name="address" id="address" onChange={handleChange} value={newApartment.address.borough} />
+                </div>
+                <div>
+                    <label htmlFor="address">Zip Code:</label>
+                    <input type="text" name="address" id="address" onChange={handleChange} value={newApartment.address.zipcode} />
+                </div>
+                <div>
+                    <label htmlFor="bedrooms">Bedrooms:</label>
+                    <input type="text" name="bedrooms" id="bedrooms" onChange={handleChange} value={newApartment.bedrooms} />
+                </div>
+                <div>
+                    <label htmlFor="bathrooms">Bathrooms:</label>
+                    <input type="text" name="bathrooms" id="bathrooms" onChange={handleChange} value={newApartment.bathrooms} />
+                </div>
+                <div>
+                    <label htmlFor="amenities">Amenities:</label>
+                    <input type="text" name="amenities" id="amenities" onChange={handleChange} value={newApartment.amenities} />
+                </div>
+                {/* <div>
+                <label htmlFor="imgUrl">Image:</label>
+                <input type="text" name="imgUrl" id="imgUrl" onChange={handleChange} value={newApartment.imgUrl} />
+            </div> */}
+
+                <input type="submit" value="Post" />
+            </form>
+        </div>
+    )
+}
+{/* <Form onSubmit={postApartment}> */ }
+{/* <Row classtitle="mb-3">
                 <Form.Group as={Col} md="4" controlId="validationCustom01">
                     <Form.Label>Title</Form.Label>
                     <Form.Control
                         required
                         type="text"
                         placeholder="Title"
-                        defaultValue={title}
-                        name='title'
-                        onChange={e => setTitle(e.target.value)}
+                        defaultValue={newApartment.title}
+                        title='title'
+                        onChange={handleChange} type="text" name="title" id="title"
                     />
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
@@ -119,9 +141,9 @@ const Apartment = (props) => {
                         required
                         type="text"
                         placeholder="$"
-                        defaultValue={rent}
-                        name='Rent'
-                        onChange = {e => setRent(e.target.value)}
+                        defaultValue={newApartment.rent}
+                        title='Rent'
+                        onChange={handleChange} type="text" name="rent" id="rent"
                     />
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
@@ -131,17 +153,17 @@ const Apartment = (props) => {
                         required
                         type="text"
                         placeholder="Description"
-                        defaultValue={description}
-                        name='description'
-                        onChange={e => setDescription(e.target.value)}
+                        defaultValue={newApartment.description}
+                        title='description'
+                        onChange={handleChange} type="text" name="description" id="description"
                     />
                     <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 </Form.Group>
             </Row>
-            <Row className="mb-3">
+            <Row classtitle="mb-3">
                 <Form.Group as={Col} md="4" controlId="validationCustom04">
                     <Form.Label>Neighborhood</Form.Label>
-                    <Form.Control type="text" placeholder="Bushwick" defaultValue={addressPropertiesNeighborhood} name='address' onChange = {e => setAddressPropertiesNeighborhood(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Bushwick" defaultValue={newApartment.address.neighborhood} title='address' onChange={handleChange} type="text" name="address" id="address" />
                     <Form.Control.Feedback type="invalid">
                         Please provide a valid neighborhood.
                     </Form.Control.Feedback>
@@ -149,7 +171,7 @@ const Apartment = (props) => {
 
                 <Form.Group as={Col} md="3" controlId="validationCustom03">
                     <Form.Label>Borough</Form.Label>
-                    <Form.Control type="text" placeholder="Brooklyn" defaultValue={addressPropertiesBorough} name='address' required onChange = {e => setAddressPropertiesBorough(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Brooklyn" defaultValue={newApartment.address.borough} title='address' required onChange={handleChange} type="text" name="address" id="address" />
                     <Form.Control.Feedback type="invalid">
                         Please provide a valid borough.
                     </Form.Control.Feedback>
@@ -157,17 +179,17 @@ const Apartment = (props) => {
 
                 <Form.Group as={Col} md="3" controlId="validationCustom05">
                     <Form.Label>Zip Code</Form.Label>
-                    <Form.Control type="text" placeholder="Zip Code" defaultValue={addressPropertiesZipCode} name='address' required onChange = {e => setAddressPropertiesZipCode(e.target.value)}/>
+                    <Form.Control type="text" placeholder="Zip Code" defaultValue={newApartment.address.zipcode} title='address' required onChange={handleChange} type="text" name="address" id="address" />
                     <Form.Control.Feedback type="invalid">
                         Please provide a valid zip.
                     </Form.Control.Feedback>
                 </Form.Group>
             </Row>
 
-            <Row className="mb-3">
+            <Row classtitle="mb-3">
                 <Form.Group as={Col} md="1" controlId="validationCustom04">
                     <Form.Label>Bedrooms</Form.Label>
-                    <Form.Control type="text" placeholder="number" defaultValue={bedrooms} name='bedrooms' required onChange = {e => setBedrooms(e.target.value)}/>
+                    <Form.Control type="text" placeholder="number" defaultValue={newApartment.bedrooms} title='bedrooms' required onChange={handleChange} type="text" name="bedrooms" id="bedrooms" />
                     <Form.Control.Feedback type="invalid">
                         Please provide number of bedrooms.
                     </Form.Control.Feedback>
@@ -175,7 +197,7 @@ const Apartment = (props) => {
 
                 <Form.Group as={Col} md="1" controlId="validationCustom03">
                     <Form.Label>Bathrooms</Form.Label>
-                    <Form.Control type="text" placeholder="number" defaultValue={bathrooms} name='bathrooms' required onChange = {e => setBathrooms(e.target.value)}/>
+                    <Form.Control type="text" placeholder="number" defaultValue={newApartment.bathrooms} title='bathrooms' required onChange={handleChange} type="text" name="bathrooms" id="bathrooms" />
                     <Form.Control.Feedback type="invalid">
                         Please provide number of bathrooms.
                     </Form.Control.Feedback>
@@ -183,7 +205,7 @@ const Apartment = (props) => {
 
                 <Form.Group as={Col} md="1" controlId="validationCustom03">
                     <Form.Label>Roommates</Form.Label>
-                    <Form.Control type="text" placeholder="number" defaultValue={roommates} name='roommates' required onChange = {e => setRoommates(e.target.value)} />
+                    <Form.Control type="text" placeholder="number" defaultValue={newApartment.roommates} title='roommates' required onChange={handleChange} type="text" name="rooommates" id="roommates" />
                     <Form.Control.Feedback type="invalid">
                         Please provide number of roommates.
                     </Form.Control.Feedback>
@@ -191,14 +213,14 @@ const Apartment = (props) => {
 
                 <Form.Group as={Col} md="4" controlId="validationCustom05">
                     <Form.Label>Amenities</Form.Label>
-                    <Form.Control type="text" placeholder="optional" defaultValue={amenities} name='amenities' onChange = {e => setAmenities(e.target.value)} />
+                    <Form.Control type="text" placeholder="optional" defaultValue={newApartment.amenities} title='amenities' onChange={handleChange} type="text" name="amenities" id="amenities" />
                 </Form.Group>
             </Row>
-            {/* <Form.Group className="position-relative mb-3">
+            {/* <Form.Group classtitle="position-relative mb-3">
                 <Form.Label>File</Form.Label>
                 <Form.Control
                     type="file"
-                    name="file"
+                    title="file"
                     onChange={handleChange}
                     isInvalid={!!errors.file}
                 />
@@ -206,9 +228,6 @@ const Apartment = (props) => {
                     {errors.file}
                 </Form.Control.Feedback>
             </Form.Group> */}
-            <Button type="submit">Submit form</Button>
-        </Form>
-    )
-}
-
-export default Apartment
+//     <Button type="submit">Submit form</Button>
+// </Form> */}
+export default CreateApartment

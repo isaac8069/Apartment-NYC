@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import apiUrl from '../../../apiConfig'
 
-const Tag = (props) => {
+const CreateTag = (props) => {
     const [newTag, setNewTag] = useState({
         name: '',
     })
@@ -26,7 +26,8 @@ const Tag = (props) => {
         })
             .then(response => response.json())
             .then(postedTag => {
-                props.refreshTags()
+                console.log('POSTED TAG', postedTag)
+                // props.refreshTags()
                 setNewTag({
                     name: ''
                 })
@@ -46,4 +47,4 @@ const Tag = (props) => {
     )
 }
 
-export default Tag
+export default CreateTag

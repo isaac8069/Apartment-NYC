@@ -12,12 +12,14 @@ import SignUp from './components/auth/SignUp'
 import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
-import Apartment from './components/pages/Apartment/CreateApartment'
 import Inbox from './components/pages/Message/Inbox'
 import Tag from './components/pages/Tag/CreateTag'
 import Profile from './components/pages/Profile/Profile'
 import AllApartments from './components/pages/Apartment/Apartments_All'
 import apiUrl from './apiConfig'
+import CreateApartment from './components/pages/Apartment/CreateApartment'
+import AllTags from './components/pages/Tag/Tags_All'
+import CreateTag from './components/pages/Tag/CreateTag'
 
 
 
@@ -51,23 +53,44 @@ const App = () => {
 	const [apartments, setApartments] = useState([])
 	useEffect(() => {
 		getApartments()
-	  },[])
-	
-	 const getApartments = () => {
-		  fetch(`${apiUrl}/apartments`, {
-			  method: 'GET',
-			  headers: {
+	}, [])
+
+	const getApartments = () => {
+		fetch(`${apiUrl}/apartments`, {
+			method: 'GET',
+			headers: {
 				'Content-Type': 'application/json',
 				// 'Authorization': `Bearer ${user.token}`
-			  }
-		  })
-		  
-			  .then(res => res.json())
-			  .then(foundApartments => {
-				  setApartments(foundApartments.apartments)
-			  },[])
-			  .catch(err => console.log(err))
-	  }
+			}
+		})
+
+			.then(res => res.json())
+			.then(foundApartments => {
+				setApartments(foundApartments.apartments)
+			}, [])
+			.catch(err => console.log(err))
+	}
+
+	const [tags, setTags] = useState([])
+	useEffect(() => {
+		getTags()
+	}, [])
+
+	const getTags = () => {
+		fetch(`${apiUrl}/tags`, {
+			method: 'GET',
+			headers: {
+				'Content-Type': 'application/json',
+				// 'Authorization': `Bearer ${user.token}`
+			}
+		})
+
+			.then(res => res.json())
+			.then(foundTags => {
+				setTags(foundTags.tags)
+			}, [])
+			.catch(err => console.log(err))
+	}
 
 	return (
 		<Fragment>
@@ -99,15 +122,19 @@ const App = () => {
 				/>
 				<Route
 					path='/apartments'
-					element={<Apartment msgAlert={msgAlert} user={user} />}
+					element={<CreateApartment msgAlert={msgAlert} user={user} />}
 				/>
 				<Route
 					path='/apartments/all'
-					element={<AllApartments msgAlert={msgAlert} user={user} apartments={apartments}/>}
+					element={<AllApartments msgAlert={msgAlert} user={user} apartments={apartments} />}
 				/>
 				<Route
 					path='/tags'
-					element={<Tag msgAlert={msgAlert} user={user} />}
+					element={<CreateTag msgAlert={msgAlert} user={user} />}
+				/>
+				<Route
+					path='/tags/all'
+					element={<AllTags msgAlert={msgAlert} user={user} tags={tags}/>}
 				/>
 				<Route
 					path='/messages'

@@ -24,6 +24,16 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
+			<Link to='/tags' style={linkStyle}>
+				Tags
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to='/tags/all' style={linkStyle}>
+				All Tags
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
 			<Link to='/messages' style={linkStyle}>
 				Inbox
 			</Link>
