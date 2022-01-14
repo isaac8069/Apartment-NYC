@@ -21,10 +21,11 @@ MongoDB, Express, React, Node
 
 ## Wireframes
 
-<link=https://miro.com/app/board/uXjVOXNweok=/?invite_link_id=401315528561>
+<img alt="wireframe" src="./src/components/ReadME/Flowchart.jpg">
 
 ## ERDs for database management
-<link=https://lucid.app/lucidchart/72ac617e-1f14-4a02-b36b-6e17842b2923/edit?invitationId=inv_460fb2e2-f94c-4acc-9ae8-f65560971969>
+
+<img alt="erd" src="./src/components/ReadME/Apartment NYC.jpeg">
 
 ## Timeline of Daily Sprints
 
