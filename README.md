@@ -1,4 +1,4 @@
-<img alt="apartment" src="../../ReadME/apt1.jpeg">
+<img alt="apartment" src="./src/components/ReadME/apt1.jpeg">
 
 # ApartmentNYC
 
