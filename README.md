@@ -19,9 +19,9 @@ MongoDB, Express, React, Node
     - Edit apartment listing and tags
     - Delete apartment listing and tags
 
-## Wireframes
+## Flow Chart
 
-<img alt="wireframe" src="./src/components/ReadME/Flowchart.jpg">
+<img alt="flowchart" src="./src/components/ReadME/Flowchart.jpg">
 
 ## ERDs for database management
 
