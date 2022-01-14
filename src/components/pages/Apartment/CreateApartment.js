@@ -10,12 +10,13 @@ const CreateApartment = (props) => {
         title: '',
         rent: '',
         description: '',
-        address: '',
-        address: '',
-        address: '',
+        neighborhood: '',
+        borough: '',
+        zipcode: '',
         bedrooms: '',
         bathrooms: '',
         amenities: '',
+        roommates: '',
         tags: [],
         imgUrl: ''
     })
@@ -31,49 +32,36 @@ const CreateApartment = (props) => {
                 title: newApartment.title,
                 rent: newApartment.rent,
                 description: newApartment.description,
-                address: {
-                    neighborhood: newApartment.neighborhood,
+                neighborhood: newApartment.neighborhood,
                 borough: newApartment.borough,
-                zipcode: newApartment.zipcode
-                },
+                zipcode: newApartment.zipcode,
                 bedrooms: newApartment.bedrooms,
                 bathrooms: newApartment.bathrooms,
                 amenities: newApartment.amenities,
+                roommates: newApartment.roommates,
                 tags: newApartment.tags,
                 imgUrl: newApartment.imgUrl
             }
         }
+
         const requestOptions = {
             method: 'POST',
             body: JSON.stringify(preJSONBody),
             headers: {
                 'Content-Type': 'application/json',
-                // 'Authorization': `Bearer ${props.user.token}`
+                'Authorization': `Bearer ${props.user.token}`
             },
         }
         fetch(`${apiUrl}/apartments`, requestOptions)
             .then(postedApartment => {
-                props.getApartments()
                 navigate('/apartments/all')
-                // setNewApartment({
-                //     title: '',
-                //     rent: '',
-                //     description: '',
-                //     address: '',
-                //     address: '',
-                //     address: '',
-                //     bedrooms: '',
-                //     bathrooms: '',
-                //     amenities: '',
-                //     // imgUrl: ''
-                // })
             })
             .catch(err => console.error(err))
     }
 
     return (
         <div>
-            <p>This works for now</p>
+            <h1>Create Your Listing</h1>
             <form onSubmit={postApartment}>
                 <div>
                     <label htmlFor="title">Title:</label>
@@ -89,15 +77,15 @@ const CreateApartment = (props) => {
                 </div>
                 <div>
                     <label htmlFor="address">Neighborhood:</label>
-                    <input type="text" name="address" id="address" onChange={handleChange} value={newApartment.address.neighborhood} />
+                    <input type="text" name="neighborhood" id="neighborhood" onChange={handleChange} value={newApartment.neighborhood} />
                 </div>
                 <div>
                     <label htmlFor="address">Borough:</label>
-                    <input type="text" name="address" id="address" onChange={handleChange} value={newApartment.address.borough} />
+                    <input type="text" name="borough" id="borough" onChange={handleChange} value={newApartment.borough} />
                 </div>
                 <div>
                     <label htmlFor="address">Zip Code:</label>
-                    <input type="text" name="address" id="address" onChange={handleChange} value={newApartment.address.zipcode} />
+                    <input type="text" name="zipcode" id="zipcode" onChange={handleChange} value={newApartment.zipcode} />
                 </div>
                 <div>
                     <label htmlFor="bedrooms">Bedrooms:</label>
@@ -110,6 +98,10 @@ const CreateApartment = (props) => {
                 <div>
                     <label htmlFor="amenities">Amenities:</label>
                     <input type="text" name="amenities" id="amenities" onChange={handleChange} value={newApartment.amenities} />
+                </div>
+                <div>
+                    <label htmlFor="roommates">Roommates:</label>
+                    <input type="text" name="roommates" id="roommates" onChange={handleChange} value={newApartment.roommates} />
                 </div>
                 {/* <div>
                 <label htmlFor="imgUrl">Image:</label>

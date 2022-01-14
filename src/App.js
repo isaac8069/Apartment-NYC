@@ -13,13 +13,15 @@ import SignIn from './components/auth/SignIn'
 import SignOut from './components/auth/SignOut'
 import ChangePassword from './components/auth/ChangePassword'
 import Inbox from './components/pages/Message/Inbox'
-import Tag from './components/pages/Tag/CreateTag'
-import Profile from './components/pages/Profile/Profile'
 import AllApartments from './components/pages/Apartment/Apartments_All'
 import apiUrl from './apiConfig'
 import CreateApartment from './components/pages/Apartment/CreateApartment'
 import AllTags from './components/pages/Tag/Tags_All'
 import CreateTag from './components/pages/Tag/CreateTag'
+import EditTag from './components/pages/Tag/EditTag'
+import DeleteTag from './components/pages/Tag/DeleteTag'
+import DeleteApartment from './components/pages/Apartment/DeleteApartment'
+import ApartmentTag from './components/pages/Profile/Profile'
 
 
 
@@ -92,6 +94,10 @@ const App = () => {
 			.catch(err => console.log(err))
 	}
 
+
+
+	// get all user apartments by userId
+
 	return (
 		<Fragment>
 			<Header user={user} />
@@ -126,7 +132,15 @@ const App = () => {
 				/>
 				<Route
 					path='/apartments/all'
+					element={<AllApartments msgAlert={msgAlert} user={user} apartments={apartments} getApartments={getApartments} />}
+				/>
+				<Route
+					path='/apartments/edit'
 					element={<AllApartments msgAlert={msgAlert} user={user} apartments={apartments} />}
+				/>
+				<Route
+					path='/apartments/delete'
+					element={<DeleteApartment msgAlert={msgAlert} user={user} apartments={apartments} getApartments={getApartments} />}
 				/>
 				<Route
 					path='/tags'
@@ -134,7 +148,15 @@ const App = () => {
 				/>
 				<Route
 					path='/tags/all'
-					element={<AllTags msgAlert={msgAlert} user={user} tags={tags}/>}
+					element={<AllTags msgAlert={msgAlert} user={user} tags={tags} getTags={getTags} />}
+				/>
+				<Route
+					path='/tags/edit'
+					element={<EditTag msgAlert={msgAlert} user={user} tags={tags} />}
+				/>
+				<Route
+					path='/tags/delete'
+					element={<DeleteTag msgAlert={msgAlert} user={user} tags={tags} getTags={getTags} />}
 				/>
 				<Route
 					path='/messages'
@@ -142,7 +164,7 @@ const App = () => {
 				/>
 				<Route
 					path='/profile'
-					element={<Profile msgAlert={msgAlert} user={user} />}
+					element={<ApartmentTag msgAlert={msgAlert} user={user} apartments={apartments} />}
 				/>
 			</Routes>
 			{msgAlerts.map((msgAlert) => (

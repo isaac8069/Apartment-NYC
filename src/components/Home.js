@@ -9,7 +9,7 @@ const Home = (props) => {
 		<Form className="d-flex">
         <FormControl
           type="search"
-          placeholder="Zipe Code"
+          placeholder="Zip Code"
           className="me-3"
           aria-label="Search"
         />

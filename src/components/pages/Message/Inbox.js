@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import io from 'socket.io-client'
 import Messages from './Messages'
 import MessageInput from './MessageInput'
+import apiUrl from '../../../apiConfig'
 
 
 
@@ -17,7 +18,7 @@ const Inbox = () => {
   return (
     <div className="App">
       <header className="app-header">
-        Appartment NYC Chat
+        Apartment NYC Chat
       </header>
       { socket ? (
         <div className="chat-container">

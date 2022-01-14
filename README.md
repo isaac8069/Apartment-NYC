@@ -2,37 +2,33 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+# Re-Art
 
-In the project directory, you can run:
+A fullstack MERN application which allows users the option to create an apartment listing or find an apartment from a posted listing. 
 
-### `npm start`
+## Tech stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+MongoDB, Express, React, Node
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## User flows
 
+- From the home page:
+    - Easily log on or sign up
+    - Search apartments by zipcode
+- Once logged in:
+    - Create an apartment listing and tags for association
+    - Find an apartment and contact the owner
+    - Edit apartment listing and tags
+    - Delete apartment listing and tags
 
-## Learn More
+## Wireframes
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+<link=https://miro.com/app/board/uXjVOXNweok=/?invite_link_id=401315528561>
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## ERDs for database management
+<link=https://lucid.app/lucidchart/72ac617e-1f14-4a02-b36b-6e17842b2923/edit?invitationId=inv_460fb2e2-f94c-4acc-9ae8-f65560971969>
 
-### Code Splitting
+## Timeline of Daily Sprints
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+1. Planning out features and functionality, developing wireframes, planning data management, create schedule for the week via Trello
+2. Every morning I planned out what needed to be done for the day. I set daily goals to achieve and checked them off as I completed them.

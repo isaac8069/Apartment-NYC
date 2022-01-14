@@ -1,5 +1,7 @@
-import { Card, Row, Col, ListGroup, ListGroupItem, CardGroup } from 'react-bootstrap'
-import { useEffect } from 'react'
+import { useState, useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import apiUrl from "../../../apiConfig"
+import { Card, Row, Col, ListGroup, ListGroupItem, CardGroup, Button } from 'react-bootstrap'
 
 const box = {
     textAlign: 'left',
@@ -7,17 +9,41 @@ const box = {
     padding: '55px'
   }
 
-const AllApartments = (props) => {
-    console.log('PROPS IN ALL APARTMENTS', props)
+const DeleteApartment = (props) => {
 
-    useEffect(() =>{
+    const navigate = useNavigate()
+    const [deleteApartment, setDeleteApartment] = useState({
+        name: ''
+    })
+
+    useEffect(() => {
         props.getApartments()
     }, [])
 
-    return (
+    const removeApartment = (e) => {
+        e.preventDefault()
+        console.log('TYPE OF TARGET:', typeof e.target.value)
+        
 
+        const requestOptions = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${props.user.token}`
+            },
+        }
+        fetch(`${apiUrl}/apartments/${e.target.value}`, requestOptions)
+            .then(deletedApartment => {
+                props.getApartments()
+                navigate('/apartments/all')
+            })
+            .catch(err => console.error(err))
+    }
+
+    return (
         <div style={box}>
 
+            <h1>Apartments</h1>
             <ul>
                 {
                     props.apartments.map((apartment, a) => (
@@ -39,16 +65,15 @@ const AllApartments = (props) => {
                                     <ListGroupItem><b>Image: </b>{apartment.imgUrl}</ListGroupItem>
 
                                 </ListGroup>
+                                <Button type="button" onClick={removeApartment} value={apartment._id}>Delete</Button>
                             </Card>
                             </CardGroup>
                         </li>
                     ))
                 }
             </ul>
-
         </div>
-
     )
 }
 
-export default AllApartments
+export default DeleteApartment

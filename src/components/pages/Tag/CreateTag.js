@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import apiUrl from '../../../apiConfig'
+import { useNavigate } from 'react-router-dom'
 
 const CreateTag = (props) => {
+    const navigate = useNavigate()
     const [newTag, setNewTag] = useState({
         name: '',
     })
@@ -10,27 +12,25 @@ const CreateTag = (props) => {
         setNewTag({ ...newTag, [e.target.name]: e.target.value })
     }
 
-    // const handleCheck = (e) => {
-    //     setNewTag({ ...newTag, [e.target.name]: e.target.checked })
-    // }
 
     const postTag = (e) => {
         e.preventDefault()
         let preJSONBody = {
-            name: newTag.name
+            tag: {
+                name: newTag.name
+            }
         }
-        fetch(`${apiUrl}/tags`, {
+        const requestOptions = {
             method: 'POST',
             body: JSON.stringify(preJSONBody),
-            headers: { 'Content-Type': 'application/json' }
-        })
-            .then(response => response.json())
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${props.user.token}`
+            },
+        }
+        fetch(`${apiUrl}/tags`, requestOptions)
             .then(postedTag => {
-                console.log('POSTED TAG', postedTag)
-                // props.refreshTags()
-                setNewTag({
-                    name: ''
-                })
+                navigate('/tags/all')
             })
             .catch(err => console.error(err))
     }

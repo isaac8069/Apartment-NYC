@@ -24,6 +24,16 @@ const authenticatedOptions = (
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
+			<Link to='/apartments/edit' style={linkStyle}>
+				Edit Listings
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to='/apartments/delete' style={linkStyle}>
+				Delete Listings
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
 			<Link to='/tags' style={linkStyle}>
 				Tags
 			</Link>
@@ -31,6 +41,16 @@ const authenticatedOptions = (
 		<Nav.Link>
 			<Link to='/tags/all' style={linkStyle}>
 				All Tags
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to='/tags/edit' style={linkStyle}>
+				Edit Tags
+			</Link>
+		</Nav.Link>
+		<Nav.Link>
+			<Link to='/tags/delete' style={linkStyle}>
+				Delete Tags
 			</Link>
 		</Nav.Link>
 		<Nav.Link>
