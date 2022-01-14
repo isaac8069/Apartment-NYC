@@ -1,8 +1,6 @@
-# Getting Started with Create React App
+<img alt="art" src="./src/components/homeComponents/images/readme/readme_header.jpg">
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
-# Re-Art
+# ApartmentNYC
 
 A fullstack MERN application which allows users the option to create an apartment listing or find an apartment from a posted listing. 
 
