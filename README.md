@@ -1,4 +1,4 @@
-<img alt="apartment" src="/Users/isaacnewman/sei_pumpkin_smashers/Projects/AptNYC/src/apt1.jpeg">
+<img alt="apartment" src="../../ReadME/apt1.jpeg">
 
 # ApartmentNYC
 
