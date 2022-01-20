@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react"
 import apiUrl from "../../../apiConfig"
-import { Link } from "react-router-dom"
 
 const UserApartments = (props) => {
     
 	// get an apartment by Id
-	const [userApartment, setUserApartment] = useState([])
+	const [userApartment, setUserApartment] = useState()
 	useEffect(() => {
 		getUserApartment()
 	}, [])
@@ -15,44 +14,30 @@ const UserApartments = (props) => {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${props.token}`
+                'Authorization': `Bearer ${props.user.token}`
             },
         }
-        fetch(`${apiUrl}/apartments/user/${props._id}`, requestOptions)
+        console.log('USER APARTMENTS', setUserApartment)
+        
+        fetch(`${apiUrl}/apartments/user/${props.user._id}`, requestOptions)
             .then(res => res.json())
-			.then(foundApartment => {
-				setUserApartment(foundApartment.apartments)
-			}, [])
+			.then(foundApartments => {
+                console.log('THESE ARE THE USER APARTMENTS', foundApartments)
+                console.log('USER APARTMENTS SET TO STATE', userApartment)
+				setUserApartment(foundApartments)
+			})
 			.catch(err => console.log(err))
 	}
+    const userApartmentList = userApartment ? userApartment.apartments.map((apartment) => { return <li> {apartment.title} </li>}) : null
+    console.log(userApartmentList)
+    console.log('USER CREATED APT', userApartment)
 
     return (
 
         <div>
-
-            <h1>Apartment</h1>
-            <ul>
-                {
-                    props.apartments.map(apartment => (
-                        <li>
-        
-                            {apartment.title}
-                           
-                
-                        </li>
-                    ))
-                }
-            </ul>
+            {userApartmentList}
         </div>
         
-    )
-
-
-	
-    return(
-        <div>
-            <h1>Found User Apartment</h1>
-        </div>
     )
 }
 
