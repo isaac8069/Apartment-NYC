@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import apiUrl from '../../../apiConfig'
 import { useNavigate } from 'react-router-dom'
+import { Form, FormControl, FormLabel, Button } from 'react-bootstrap'
 
 const CreateTag = (props) => {
     const navigate = useNavigate()
@@ -36,14 +37,15 @@ const CreateTag = (props) => {
     }
 
     return (
-        <form onSubmit={postTag}>
-            <div>
-                <label htmlFor="name">Name:</label>
-                <input type="text" name="name" id="name" onChange={handleChange} value={newTag.name} />
-            </div>
-
-            <input type="submit" value="Post" />
-        </form>
+        <div>
+            <Form onSubmit={postTag}>
+                <Form.Group className="mb-3" controlId="formGridTag">
+                    <FormLabel>Tag</FormLabel>
+                    <FormControl type="text" name="name" onChange={handleChange} value={newTag.name} />
+                </Form.Group>
+                <Button type="submit" variant="primary">Submit</Button>
+            </Form>
+        </div>
     )
 }
 
