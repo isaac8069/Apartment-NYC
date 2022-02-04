@@ -102,7 +102,7 @@ const App = () => {
 		<Fragment>
 			<Header user={user} />
 			<Routes>
-				<Route path='/' element={<Home msgAlert={msgAlert} user={user} />} />
+				<Route path='/' element={<Home msgAlert={msgAlert} user={user} apartments={apartments} getApartments={getApartments}/>} />
 				<Route
 					path='/sign-up'
 					element={<SignUp msgAlert={msgAlert} setUser={setUser} />}

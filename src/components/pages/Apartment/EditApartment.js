@@ -4,35 +4,6 @@ import { Form, Button, Card } from 'react-bootstrap'
 import apiUrl from '../../../apiConfig'
 
 
-const box = {
-    textAlign: 'left',
-    margin: '2px',
-    padding: '5px'
-}
-const button = {
-    margin: '10px',
-}
-const bgc = {
-    backgroundColor: 'lightgrey',
-    marginTop: "20px",
-    padding: '25px'
-}
-const fav = {
-    textAlign: 'left',
-    margin: '2px',
-    listStyle: 'none'
-}
-const check = {
-    padding: '5px'
-}
-const title = {
-    fontSize: '40px',
-    textAlign: 'left',
-    margin: '20px'
-}
-const subtitle = {
-    fontSize: '20px',
-}
 
 const EditApartment = (props) => {
     //useNavigate for redirecting once apartment is succesfully patched
@@ -54,23 +25,6 @@ const EditApartment = (props) => {
     // Function then sets these inputs as the currentApartment state  
     const handleChange = e => {
         setCurrentApartment({ ...currentApartment, [e.target.name]: e.target.value })
-    }
-
-    // Function that runs any time user checks or unchecks one of the tag boxes
-    // Runs logic that either removes or addes tag object to currentApartment
-    // Also either removes or addes tag name to tagNames state
-    const handleCheck = e => {
-        if (e.target.checked) {
-            setCurrentApartment({ ...currentApartment, tags: [...currentApartment.tags, { _id: e.target.id, name: e.target.name }] })
-            setTagNames([...tagNames, e.target.name])
-        }
-        else {
-            let bufferTags = currentApartment.tags
-            let index = tagNames.indexOf(e.target.name)
-            bufferTags.splice(index, 1)
-            setCurrentApartment({ ...currentApartment, tags: bufferTags })
-            setTagNames(currentApartment.tags.map((e) => e.name))
-        }
     }
 
     // Function runs when Edit Apartment button is pressed
@@ -102,7 +56,7 @@ const EditApartment = (props) => {
                 'Authorization': `Bearer ${props.user.token}`
             },
         }
-        fetch(`${apiUrl}/apartments/${props.user._id}`, requestOptions)
+        fetch(`${apiUrl}/apartments/${props.apartment._id}`, requestOptions)
             .then(patchedApartment => {
                 props.getApartment()
                 navigate('/apartments/all')
@@ -112,7 +66,7 @@ const EditApartment = (props) => {
 
     // Funtion that runs when cancel button is pressed that takes user back to existing profile
   const goBack = () => {
-    return navigate('/apartments/all')
+    return navigate('/profile')
   }
 
     return (

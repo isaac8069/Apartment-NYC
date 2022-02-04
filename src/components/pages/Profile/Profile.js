@@ -46,7 +46,7 @@ const UserApartments = (props) => {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${props.user.token}`
-            },
+            }
         }
         console.log('USER APARTMENTS', setUserApartment)
 
