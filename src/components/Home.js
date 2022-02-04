@@ -41,17 +41,17 @@ const Home = (props) => {
   return (
     <div>
       <h1>HOME</h1>
-      <Form className="d-flex" onClick={getSearchZip}>
+      <Form className="d-flex" >
         <FormControl
           name='zipSearch'
           onChange={handleChange}
           value={searchZip.zipSearch}
-          type="string"
+          type="text"
           placeholder="Zip Code"
           className="me-3"
           aria-label="Search"
         />
-        <Button type="submit" variant="outline-success" >Search</Button>
+        <Button type="submit" variant="outline-success" onClick={getSearchZip}>Search</Button>
       </Form>
     </div>
   )
