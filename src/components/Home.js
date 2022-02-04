@@ -18,16 +18,7 @@ const Home = (props) => {
     setSearchZip({ ...searchZip, [e.target.name]: e.target.value })
   }
 
-  const getSearchZip = () => {
-    // e.preventDefault()
-    console.log('')
-    const requestOptions = {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        // 'Authorization': `Bearer ${props.user.token}`
-      }
-    }
+  
     console.log('SEARCH ZIP:', searchZip)
 
     fetch(`${apiUrl}/apartments/search/${searchZip.zipSearch}`, requestOptions)
