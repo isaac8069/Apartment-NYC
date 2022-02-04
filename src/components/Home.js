@@ -1,22 +1,60 @@
 import { Form, FormControl, Button } from 'react-bootstrap'
-const Home = (props) => {
-	// const { msgAlert, user } = props
-	console.log('props in home', props)
+import { useState, useEffect } from 'react'
+import apiUrl from '../apiConfig'
+import { useNavigate } from 'react-router-dom'
 
-	return (
-		<div>
-		<h1>HOME</h1>
-		<Form className="d-flex">
+const Home = (props) => {
+
+  const navigate = useNavigate()
+  // get all apartment(s) by Zip Code
+  const [searchZip, setSearchZip] = useState('')
+  useEffect(() => {
+    getSearchZip()
+  }, [])
+
+
+  const handleChange = (e) => {
+    console.log('WHAT IS E', e.target)
+    setSearchZip({ ...searchZip, [e.target.name]: e.target.value })
+  }
+
+  const getSearchZip = () => {
+    // e.preventDefault()
+    console.log('')
+    const requestOptions = {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        // 'Authorization': `Bearer ${props.user.token}`
+      }
+    }
+    console.log('SEARCH ZIP:', searchZip)
+
+    fetch(`${apiUrl}/apartments/search/${searchZip.zipSearch}`, requestOptions)
+      .then(res => res.json())
+      .then(searchZipResults => {
+        console.log('THESE ARE THE APARTMENTS BY ZIP', searchZipResults)
+      })
+      .catch(err => console.log(err))
+  }
+
+  return (
+    <div>
+      <h1>HOME</h1>
+      <Form className="d-flex" onClick={getSearchZip}>
         <FormControl
-          type="search"
+          name='zipSearch'
+          onChange={handleChange}
+          value={searchZip.zipSearch}
+          type="string"
           placeholder="Zip Code"
           className="me-3"
           aria-label="Search"
         />
-        <Button variant="outline-success">Search</Button>
+        <Button type="submit" variant="outline-success" >Search</Button>
       </Form>
-	  </div>
-	)
+    </div>
+  )
 }
 
 export default Home
