@@ -12,15 +12,13 @@ const Home = (props) => {
     getSearchZip()
   }, [])
 
-
   const handleChange = (e) => {
-    console.log('WHAT IS E', e.target)
+    console.log('WHAT IS E', e.target.value)
+    e.preventDefault()
     setSearchZip({ ...searchZip, [e.target.name]: e.target.value })
   }
-
+  
   const getSearchZip = () => {
-    // e.preventDefault()
-    console.log('')
     const requestOptions = {
       method: 'GET',
       headers: {
@@ -28,20 +26,20 @@ const Home = (props) => {
         // 'Authorization': `Bearer ${props.user.token}`
       }
     }
-    console.log('SEARCH ZIP:', searchZip)
-
+    console.log('SEARCH ZIP:', searchZip.zipSearch)
+    
     fetch(`${apiUrl}/apartments/search/${searchZip.zipSearch}`, requestOptions)
-      .then(res => res.json())
-      .then(searchZipResults => {
-        console.log('THESE ARE THE APARTMENTS BY ZIP', searchZipResults)
-      })
-      .catch(err => console.log(err))
+    .then(res => res.json())
+    .then(searchZipResults => {
+      console.log('THESE ARE THE APARTMENTS BY ZIP', searchZipResults)
+    })
+    .catch(err => console.log(err))
   }
-
+  
   return (
     <div>
       <h1>HOME</h1>
-      <Form className="d-flex" >
+      <Form className="d-flex">
         <FormControl
           name='zipSearch'
           onChange={handleChange}
