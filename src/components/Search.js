@@ -1,18 +1,38 @@
 import { Card, ListGroup, ListGroupItem, CardGroup } from 'react-bootstrap'
-import { useEffect } from 'react'
+import apiUrl from '../apiConfig'
+import { useEffect, useState } from 'react'
 
 const box = {
     textAlign: 'left',
     margin: '20px',
     padding: '55px'
-  }
+}
 
 const ZipSearchResults = (props) => {
-    console.log('PROPS IN ALL APARTMENTS', props)
+    const[searchZip, setSearchZip] = useState('')
 
-    useEffect(() =>{
-        props.getSearchZip()
+    useEffect(() => {
+        getSearchZip()
     }, [])
+
+    const getSearchZip = () => {
+        const requestOptions = {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                // 'Authorization': `Bearer ${props.user.token}`
+            }
+        }
+        console.log('SEARCH ZIP:', searchZip.zipSearch)
+
+        fetch(`${apiUrl}/apartments/search/${searchZip.zipSearch}`, requestOptions)
+            .then(res => res.json())
+            .then(searchZipResults => {
+                // navigate('/results')
+                console.log('THESE ARE THE APARTMENTS BY ZIP', searchZipResults)
+            })
+            .catch(err => console.log(err))
+    }
 
     return (
 
@@ -40,7 +60,7 @@ const ZipSearchResults = (props) => {
 
                                 </ListGroup>
                             </Card>
-                            </CardGroup>
+                        </CardGroup>
                         </li>
                     ))
                 }

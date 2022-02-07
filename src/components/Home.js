@@ -14,7 +14,7 @@ const Home = (props) => {
 
   const handleChange = (e) => {
     console.log('WHAT IS E', e.target.value)
-    e.preventDefault()
+    // e.preventDefault()
     setSearchZip({ ...searchZip, [e.target.name]: e.target.value })
   }
   
@@ -31,6 +31,7 @@ const Home = (props) => {
     fetch(`${apiUrl}/apartments/search/${searchZip.zipSearch}`, requestOptions)
     .then(res => res.json())
     .then(searchZipResults => {
+      // navigate('/results')
       console.log('THESE ARE THE APARTMENTS BY ZIP', searchZipResults)
     })
     .catch(err => console.log(err))
@@ -38,7 +39,6 @@ const Home = (props) => {
   
   return (
     <div>
-      <h1>HOME</h1>
       <Form className="d-flex" >
         <FormControl
           name='zipSearch'

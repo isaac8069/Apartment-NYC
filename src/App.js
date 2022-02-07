@@ -22,6 +22,7 @@ import EditTag from './components/pages/Tag/EditTag'
 import DeleteTag from './components/pages/Tag/DeleteTag'
 import DeleteApartment from './components/pages/Apartment/DeleteApartment'
 import ApartmentTag from './components/pages/Profile/Profile'
+import ZipSearchResults from './components/Search'
 
 
 
@@ -157,6 +158,11 @@ const App = () => {
 				<Route
 					path='/tags/delete'
 					element={<DeleteTag msgAlert={msgAlert} user={user} tags={tags} getTags={getTags} />}
+				/>
+				<Route
+					path='/results'
+					element={<ZipSearchResults msgAlert={msgAlert} user={user} apartments={apartments} />}
+							
 				/>
 				<Route
 					path='/messages'
