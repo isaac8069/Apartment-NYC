@@ -40,7 +40,7 @@ const ZipSearchResults = (props) => {
 
             <ul>
                 {
-                    props.apartments.map((apartment, a) => (
+                    props.getSearchZip.map((apartment, a) => (
                         <li key={a}><CardGroup>
                             <Card style={{ width: '18rem' }} border="success">
                                 <Card.Img variant="top" src="holder.js/100px180?text=Image cap" />

@@ -2,6 +2,7 @@ import { Form, FormControl, Button } from 'react-bootstrap'
 import { useState, useEffect } from 'react'
 import apiUrl from '../apiConfig'
 import { useNavigate } from 'react-router-dom'
+import ZipSearchResults from './Search'
 
 const Home = (props) => {
 
@@ -52,6 +53,7 @@ const Home = (props) => {
       </Form>
         <Button type="submit" variant="outline-success" onClick={getSearchZip}>Search</Button>
     </div>
+    
   )
 }
 
